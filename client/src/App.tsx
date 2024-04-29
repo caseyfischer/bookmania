@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import './App.css'
+import '~/App.css'
+import EventCard from '~/components/EventCard.tsx'
 
 function App() {
 
   return (
-    <>
-        <div>hi :)</div>
-    </>
+    <EventCard></EventCard>
   )
 }
 
