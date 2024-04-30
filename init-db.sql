@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS events;
 
 CREATE TABLE events (
     event_id UUID NOT NULL DEFAULT uuid_generate_v4 (),
-    name VARCHAR (50) UNIQUE NOT NULL,
+    description VARCHAR (255),
     created_by UUID,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY(event_id),
