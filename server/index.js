@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import user from './routes/user-routes.js';
+import router from './router.js';
 
 const app = express();
 
@@ -10,7 +10,8 @@ app.use(
     extended: true,
   })
 );
-app.use('/users/', user);
+
+app.use('/', router);
 
 app.listen(8080, (req, res) => {
     console.log("connected!");
