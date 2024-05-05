@@ -1,5 +1,6 @@
-import '~/App.css'
-import EventCard from '~/components/EventCard.tsx'
+import '~/App.scss';
+import '~/components/EventCard/DateButton.module.scss';
+import EventCard from '~/components/EventCard';
 
 function App() {
 
