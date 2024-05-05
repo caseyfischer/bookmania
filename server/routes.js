@@ -3,6 +3,7 @@ import queries from './queries.js';
 
 const router = express.Router();
 
-router.get('/', queries.getAllUsers);
+router.get('/users', queries.getAllUsers);
+// router.get('/users', )
 
 export default router;

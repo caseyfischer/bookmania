@@ -1,8 +1,6 @@
-import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes.js';
-
 
 const app = express();
 
@@ -17,9 +15,6 @@ app.use('/', routes);
 app.listen(8080, (req, res) => {
     console.log("connected!");
 });
-
-
-
 
 // await client.connect()
  
