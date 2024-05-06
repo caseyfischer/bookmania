@@ -22,20 +22,38 @@ const getAllEventsForUser = async function({ body }, response) {
 const createEvent = async function({ body }, response) {
     try {
         const { userId, description } = body;
-        await prisma.event.create({
+        console.log(`received request ${description}`);
+        const event = await prisma.event.create({
             data: {
                 description,
-                user: {
+                createdBy: {
                     connect: {
                         id: userId
                     }
                 }
             }
-        })
-        response.status(200)
+        });
+        response.status(200).json(event);
     } catch (e) {
+        console.log(e);
         next(e);
     }
 }
 
-export { getAllEventsForUser, createEvent };
+const deleteEvent = async function({ params }, response) {
+    try {
+        const { eventId } = params;
+        console.log(`deleting event with id ${eventId}`);
+        await prisma.event.delete({
+            where: {
+                id: eventId
+            }
+        });
+        response.status(204).json();
+    } catch(e) {
+        console.log(e);
+        next(e);
+    }
+}
+
+export { getAllEventsForUser, createEvent, deleteEvent };

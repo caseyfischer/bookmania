@@ -1,12 +1,13 @@
 import '~/App.scss';
-import '~/components/EventCard/DateButton.module.scss';
-import EventCard from '~/components/EventCard';
+import '~/components/EventPage/DateButton.module.scss';
+import EventPage from '~/components/EventPage';
 
 function App() {
-
-  return (
-    <EventCard></EventCard>
-  )
+    return (
+        <>
+            <EventPage></EventPage>
+        </>
+  );
 }
 
-export default App
+export default App;

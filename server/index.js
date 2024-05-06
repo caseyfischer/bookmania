@@ -11,7 +11,7 @@ app.use(
   })
 );
 
-app.use('/', router);
+app.use('/api/', router);
 
 app.listen(8080, (req, res) => {
     console.log("connected!");
