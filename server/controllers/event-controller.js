@@ -22,7 +22,6 @@ const getAllEventsForUser = async function({ body }, response) {
 const createEvent = async function({ body }, response) {
     try {
         const { userId, description } = body;
-        console.log(`received request ${description}`);
         const event = await prisma.event.create({
             data: {
                 description,
@@ -42,8 +41,7 @@ const createEvent = async function({ body }, response) {
 
 const deleteEvent = async function({ params }, response) {
     try {
-        const { eventId } = params;
-        console.log(`deleting event with id ${eventId}`);
+        const eventId = parseInt(params.eventId);
         await prisma.event.delete({
             where: {
                 id: eventId

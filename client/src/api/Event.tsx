@@ -1,5 +1,5 @@
 type Event = {
-    id: string,
+    id: number,
     description: string | undefined,
 };
 

@@ -27,7 +27,7 @@ function EventPage() {
         });
     }
 
-    const deleteEvent = (id: string) => {
+    const deleteEvent = (id: number) => {
         const newEvents = events.filter((val) => { return val.id !== id; });
         setEvents(newEvents);
     }
