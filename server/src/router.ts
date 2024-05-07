@@ -1,6 +1,6 @@
 import express from 'express';
-import users from './routes/users.js';
-import events from './routes/events.js';
+import users from './routes/users';
+import events from './routes/events';
 
 const router = express.Router();
 

@@ -1,9 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import next from 'express';
+import Express from 'express';
+
 
 const prisma = new PrismaClient();
 
-const getAllEventsForUser = async function({ body }, response) {
+const getAllEventsForUser = async function({ body }: Express.Request, response: Express.Response) {
     try {
         const { id } = body;
         const events = await prisma.event.findMany({
@@ -15,11 +17,21 @@ const getAllEventsForUser = async function({ body }, response) {
         });
         response.status(200).json(events);
     } catch (e) {
-        next(e);
+        response.status(500).send("The server encountered an error.");
+        next();
     }
 }
 
-const createEvent = async function({ body }, response) {
+const getEvent = async function({ params }: Express.Request, response: Express.Response) {
+    try {
+
+    } catch (e) {
+        console.log(e);
+        next();
+    }
+}
+
+const createEvent = async function({ body }: Express.Request, response: Express.Response) {
     try {
         const { userId, description } = body;
         const event = await prisma.event.create({
@@ -35,11 +47,12 @@ const createEvent = async function({ body }, response) {
         response.status(200).json(event);
     } catch (e) {
         console.log(e);
-        next(e);
+        next();
+        response.status(500).json();
     }
 }
 
-const deleteEvent = async function({ params }, response) {
+const deleteEvent = async function({ params }: Express.Request, response: Express.Response) {
     try {
         const eventId = parseInt(params.eventId);
         await prisma.event.delete({
@@ -50,7 +63,8 @@ const deleteEvent = async function({ params }, response) {
         response.status(204).json();
     } catch(e) {
         console.log(e);
-        next(e);
+        next();
+        response.status(500).json();
     }
 }
 

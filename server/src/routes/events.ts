@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllEventsForUser, createEvent, deleteEvent } from '../controllers/event-controller.js';
+import { getAllEventsForUser, createEvent, deleteEvent } from '../controllers/event-controller';
 const router = express.Router();
 
 router.get('/', getAllEventsForUser);
