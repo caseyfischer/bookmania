@@ -24,7 +24,20 @@ const getAllEventsForUser = async function({ body }: Express.Request, response: 
 
 const getEvent = async function({ params }: Express.Request, response: Express.Response) {
     try {
-
+        const id = parseInt(params.eventId);
+        const event = await prisma.event.findFirst({
+            where: {
+                id: {
+                    equals: id
+                }
+            },
+            include: {
+                EventBand: true,
+                EventDate: true,
+                EventVenue: true,
+            }
+        });
+        response.status(200).json(event);
     } catch (e) {
         console.log(e);
         next();
@@ -41,7 +54,12 @@ const createEvent = async function({ body }: Express.Request, response: Express.
                     connect: {
                         id: userId
                     }
-                }
+                },
+            },
+            include: {
+                EventBand: true,
+                EventDate: true,
+                EventVenue: true,
             }
         });
         response.status(200).json(event);
@@ -68,4 +86,4 @@ const deleteEvent = async function({ params }: Express.Request, response: Expres
     }
 }
 
-export { getAllEventsForUser, createEvent, deleteEvent };
+export { getAllEventsForUser, getEvent, createEvent, deleteEvent };
