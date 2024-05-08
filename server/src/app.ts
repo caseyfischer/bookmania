@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import router from './router';
+import router from '~/router';
+import { errorHandler } from '~/middleware/errors';
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(
     extended: true,
   })
 );
+app.use(errorHandler);
 
 app.use('/api/', router);
 
