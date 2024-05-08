@@ -1,13 +1,15 @@
 import { PrismaClient } from "@prisma/client";
-import next from 'express';
 import Express from 'express';
 
 
 const prisma = new PrismaClient();
 
-const getAllEventsForUser = async function({ body }: Express.Request, response: Express.Response) {
+const getAllEventsForUser = async function({ body }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const { id } = body;
+        if (!id) {
+            throw new Error("id is required");
+        }
         const events = await prisma.event.findMany({
             where: {
                 id: {
@@ -17,14 +19,16 @@ const getAllEventsForUser = async function({ body }: Express.Request, response: 
         });
         response.status(200).json(events);
     } catch (e) {
-        response.status(500).send("The server encountered an error.");
         next();
     }
 }
 
-const getEvent = async function({ params }: Express.Request, response: Express.Response) {
+const getEvent = async function({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const id = parseInt(params.eventId);
+        if (!id) {
+            throw new Error("must provide an id");
+        }
         const event = await prisma.event.findFirst({
             where: {
                 id: {
@@ -39,14 +43,16 @@ const getEvent = async function({ params }: Express.Request, response: Express.R
         });
         response.status(200).json(event);
     } catch (e) {
-        console.log(e);
-        next();
+        next(e);
     }
 }
 
-const createEvent = async function({ body }: Express.Request, response: Express.Response) {
+const createEvent = async function({ body }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const { userId, description } = body;
+        if (!userId) {
+            throw new Error("must provide userId");
+        }
         const event = await prisma.event.create({
             data: {
                 description,
@@ -64,15 +70,16 @@ const createEvent = async function({ body }: Express.Request, response: Express.
         });
         response.status(200).json(event);
     } catch (e) {
-        console.log(e);
-        next();
-        response.status(500).json();
+        next(e);
     }
 }
 
-const deleteEvent = async function({ params }: Express.Request, response: Express.Response) {
+const deleteEvent = async function({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const eventId = parseInt(params.eventId);
+        if (!eventId) {
+            throw new Error("must provide eventId");
+        }
         await prisma.event.delete({
             where: {
                 id: eventId
@@ -80,9 +87,7 @@ const deleteEvent = async function({ params }: Express.Request, response: Expres
         });
         response.status(204).json();
     } catch(e) {
-        console.log(e);
-        next();
-        response.status(500).json();
+        next(e);
     }
 }
 

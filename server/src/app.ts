@@ -11,16 +11,10 @@ app.use(
     extended: true,
   })
 );
-app.use(errorHandler);
 
 app.use('/api/', router);
+app.use(errorHandler);
 
 app.listen(8080, () => {
-    console.log("connected!");
+    console.log("started!");
 });
-
-// await client.connect()
- 
-// const res = await client.query('SELECT * FROM users')
-// console.log(res.rows[0])
-// await client.end()
