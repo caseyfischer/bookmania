@@ -46,7 +46,7 @@ model Event {
 
 model EventDate {
   id      String   @id @default(uuid())
-  date    DateTime
+  date    DateTime  @db.Date
   status  Status   @default(UNDECIDED)
   event   Event    @relation(fields: [eventId], references: [id])
   eventId Int

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "EventDate" ALTER COLUMN "date" SET DATA TYPE DATE;
