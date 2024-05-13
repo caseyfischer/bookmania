@@ -1,30 +1,32 @@
-import DateButton from '~/components/EventPage/DateButton';
-import { Button } from '@mui/material';
-import axios from 'axios';
-import { Event } from '~/api/Event';
+import { Event } from '~/utils/api/Event';
+import classes from '~/components/EventPage/EventCard.module.scss';
+import clsx from 'clsx';
+import useEvents from '~/utils/event-store';
 
 type Props = {
     event: Event,
     deleteEvent: (id: number) => void
 }
 
-function EventCard({ event, deleteEvent }: Props) {
-    const handleDelete = async () => {
-        await axios.delete(`http://localhost:5173/api/events/${event.id}`);
-        deleteEvent(event.id);
-    }
+function EventCard({ event }: Props) {
+    const selectedEvent = useEvents((state) => state.selectedEvent);
+    const setSelectedEvent = useEvents((state) => state.setSelectedEvent);
+    const isSelected = selectedEvent && selectedEvent.id === event.id;
+
+    const classString = clsx([
+        classes.card,
+        event.id > 20 ? classes.green : classes.gray, // replace with real color check
+        isSelected ? classes.selectedCard : ''
+    ]);
 
     return (
-        <>
-            <div>id: {event.id}</div>
-            <DateButton></DateButton>
-            <Button variant="outlined"
-                    onClick={handleDelete}
-            >
-                X
-            </Button>
-        </>
-      );
+        <button
+            className={classString}
+            onClick={() => setSelectedEvent(event)}
+        >
+            {event.description || "fake description longer text"}
+        </button>
+    );
 }
 
 export default EventCard;

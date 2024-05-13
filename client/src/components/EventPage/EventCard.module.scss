@@ -1,0 +1,26 @@
+@import '~/mixins/box';
+
+.gray {
+    --box-color: var(--color-undecided);
+}
+
+.green {
+    --box-color: var(--color-completed);
+}
+
+.card {
+    @include box-flat-with-color(var(--box-color));
+    cursor: pointer;
+    padding: 10px;
+    width: 250px;
+    height: 70px;
+    font-size: 16pt;
+    margin: 4px 0;
+}
+
+.selectedCard {
+    @include box-tall-with-color(var(--box-color));
+    background-color: white;
+    font-style: italic;
+    cursor: pointer;
+}

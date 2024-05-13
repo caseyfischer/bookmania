@@ -16,7 +16,6 @@ function DateButton() {
                     value={dayjs('2024-05-19')}
                 />
             </LocalizationProvider>
-            DateButton
         </div>
     </>
   )
