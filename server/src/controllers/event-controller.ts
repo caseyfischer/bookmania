@@ -4,15 +4,15 @@ import Express from 'express';
 
 const prisma = new PrismaClient();
 
-const getAllEventsForUser = async function({ body }: Express.Request, response: Express.Response, next: Express.NextFunction) {
+const getAllEventsForUser = async function (request: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
-        const { id } = body;
+        const id = "6cf7370a-260a-4599-83f9-24df8bbdc771"; // replace with real id
         if (!id) {
             throw new Error("id is required");
         }
         const events = await prisma.event.findMany({
             where: {
-                id: {
+                userId: {
                     equals: id
                 }
             }
@@ -23,7 +23,7 @@ const getAllEventsForUser = async function({ body }: Express.Request, response: 
     }
 }
 
-const getEvent = async function({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
+const getEvent = async function ({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const id = parseInt(params.eventId);
         if (!id) {
@@ -47,7 +47,7 @@ const getEvent = async function({ params }: Express.Request, response: Express.R
     }
 }
 
-const createEvent = async function({ body }: Express.Request, response: Express.Response, next: Express.NextFunction) {
+const createEvent = async function ({ body }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const { userId, description } = body;
         if (!userId) {
@@ -74,7 +74,29 @@ const createEvent = async function({ body }: Express.Request, response: Express.
     }
 }
 
-const deleteEvent = async function({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
+const updateEvent = async function ({ body, params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
+    try {
+        const { description } = body;
+        const id = parseInt(params.eventId);
+        if (!id) {
+            throw new Error("must provide id");
+        }
+
+        const event = await prisma.event.update({
+            where: {
+                id: id
+            },
+            data: {
+                description: description
+            }
+        })
+        response.status(201).json(event);
+    } catch (e) {
+        next(e);
+    }
+}
+
+const deleteEvent = async function ({ params }: Express.Request, response: Express.Response, next: Express.NextFunction) {
     try {
         const eventId = parseInt(params.eventId);
         if (!eventId) {
@@ -86,9 +108,9 @@ const deleteEvent = async function({ params }: Express.Request, response: Expres
             }
         });
         response.status(204).json();
-    } catch(e) {
+    } catch (e) {
         next(e);
     }
 }
 
-export { getAllEventsForUser, getEvent, createEvent, deleteEvent };
+export { getAllEventsForUser, getEvent, createEvent, updateEvent, deleteEvent };
