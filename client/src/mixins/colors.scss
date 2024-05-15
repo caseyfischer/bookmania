@@ -1,0 +1,14 @@
+:root {
+    --color-undecided: #a0a0a0;
+    --color-rejected: #d80f0f;
+    --color-completed: #7BFF00;
+    --color-completed: #7BFF00;
+}
+
+.gray {
+    --box-color: var(--color-undecided);
+}
+
+.green {
+    --box-color: var(--color-completed);
+}

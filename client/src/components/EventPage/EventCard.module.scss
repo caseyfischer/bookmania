@@ -1,12 +1,5 @@
 @import '~/mixins/box';
-
-.gray {
-    --box-color: var(--color-undecided);
-}
-
-.green {
-    --box-color: var(--color-completed);
-}
+@import '~/mixins/colors';
 
 .card {
     @include box-flat-with-color(var(--box-color));

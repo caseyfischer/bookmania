@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@mui/material';
 import { Event } from '~/utils/api/Event';
 import EventCard from './EventCard';
@@ -15,10 +14,9 @@ function EventsList({ events, deleteEvent, createNewEvent }: Props) {
         <ul className={classes.eventsList}>
             {events.map((event) => {
                 return (
-                    <li>
+                    <li key={event.id}>
                         <EventCard
                             event={event}
-                            key={event.id}
                             deleteEvent={deleteEvent}
                         />
                     </li>

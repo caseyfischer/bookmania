@@ -9,22 +9,22 @@ type Props = {
 }
 
 function EventCard({ event }: Props) {
-    const selectedEvent = useEvents((state) => state.selectedEvent);
-    const setSelectedEvent = useEvents((state) => state.setSelectedEvent);
-    const isSelected = selectedEvent && selectedEvent.id === event.id;
+    const selectedEventId = useEvents((state) => state.selectedEventId);
+    const setSelectedEvent = useEvents((state) => state.setSelectedEventId);
+    const isSelected = selectedEventId && selectedEventId === event.id;
 
     const classString = clsx([
         classes.card,
-        event.id > 20 ? classes.green : classes.gray, // replace with real color check
+        event.description ? classes.green : classes.gray, // replace with real color check
         isSelected ? classes.selectedCard : ''
     ]);
 
     return (
         <button
             className={classString}
-            onClick={() => setSelectedEvent(event)}
+            onClick={() => setSelectedEvent(event.id)}
         >
-            {event.description || "fake description longer text"}
+            {event.description || `Event number ${event.id}`}
         </button>
     );
 }

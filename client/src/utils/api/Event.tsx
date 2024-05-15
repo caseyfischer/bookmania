@@ -34,6 +34,18 @@ class EventDataSource {
         }
     }
 
+    static async updateEvent(eventId: number, description: string): Promise<Event | undefined> {
+        try {
+            const response = await axios.put(`${EventDataSource.#PATH}/${eventId}`, {
+                description
+            });
+            return response.data;
+        } catch (e) {
+            // gotta be a better way to handle errors here
+            return undefined;
+        }
+    }
+
     static async deleteEvent(eventId: string): Promise<boolean> {
         try {
             // better way to parameterize this url...?

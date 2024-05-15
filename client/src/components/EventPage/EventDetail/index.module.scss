@@ -1,0 +1,35 @@
+@import '~/mixins/box';
+@import '~/mixins/colors';
+
+.container {}
+
+.card {
+    --box-color: var(--color-undecided);
+    @include box-tall-with-color(var(--box-color));
+    // border: 2px solid black;
+    min-width: 640px;
+    min-height: 480px;
+}
+
+.card button {
+    border: none;
+    background-color: white;
+}
+
+.editable {
+    @include box-flat-with-color(var(--box-color));
+    cursor: pointer;
+}
+
+.editing {
+    @include box-tall-with-color(var(--box-color));
+}
+
+.title {
+    padding: 10px;
+}
+
+.editBox {
+    position: relative;
+    top: 30px;
+}
