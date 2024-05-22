@@ -1,14 +1,12 @@
 @import '~/mixins/box';
 @import '~/mixins/colors';
 
-.container {}
-
 .card {
     --box-color: var(--color-undecided);
     @include box-tall-with-color(var(--box-color));
-    // border: 2px solid black;
     min-width: 640px;
     min-height: 480px;
+    padding: 30px;
 }
 
 .card button {
@@ -32,4 +30,22 @@
 .editBox {
     position: relative;
     top: 30px;
+}
+
+.moreMenuIcon {
+    @include box-flat-with-color(var(--color-undecided));
+    border: 1px solid var(--color-undecided) !important; //ughhh
+    float: right;
+    height: 30px;
+    width: 30px;
+    line-height: 3px;
+}
+
+.moreMenuIcon.open {
+    @include box-tall-with-color(var(--color-undecided));
+    border-radius: 50%;
+}
+
+.moreMenuIcon p {
+    transform: translateY(-5px);
 }

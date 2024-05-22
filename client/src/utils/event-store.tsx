@@ -10,6 +10,7 @@ type EventState = {
 type EventAction = {
     setEvents: (newEvents: Event[]) => void,
     updateEvent: (newEvent: Event) => void,
+    deleteEvent: (id: number) => void,
     setSelectedEventId: (newEvent: number) => void,
 }
 
@@ -22,6 +23,12 @@ const useEvents = create<EventState & EventAction>((set) => ({
         // map through existing events and replace the event whose id matches
         const newEvents = state.events.map((event) => {
             return event.id !== newEvent.id ? event : newEvent;
+        });
+        return ({ events: newEvents });
+    }),
+    deleteEvent: (id) => set((state) => {
+        const newEvents = state.events.filter((event) => {
+            return event.id !== id;
         });
         return ({ events: newEvents });
     }),

@@ -46,7 +46,7 @@ class EventDataSource {
         }
     }
 
-    static async deleteEvent(eventId: string): Promise<boolean> {
+    static async deleteEvent(eventId: number): Promise<boolean> {
         try {
             // better way to parameterize this url...?
             const response = await axios.delete(`${EventDataSource.#PATH}/${eventId}`);
