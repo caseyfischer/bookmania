@@ -1,4 +1,3 @@
-import React from 'react';
 import useEvents from '~/utils/event-store';
 import EventDataSource from '~/utils/api/Event';
 import EventsList from './EventsList';

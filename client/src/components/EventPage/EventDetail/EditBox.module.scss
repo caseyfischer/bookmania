@@ -1,0 +1,17 @@
+@import '~/mixins/box';
+@import '~/mixins/colors';
+
+.editBox {
+    @include box-tall-with-color(var(--color-undecided));
+    padding: 20px;
+    position: relative;
+    top: 30px;
+}
+
+.editBox button {
+    @include box-flat-with-color(var(--color-undecided));
+    cursor: pointer;
+    display: block;
+    margin: 20px auto 0px auto;
+    padding: 10px;
+}

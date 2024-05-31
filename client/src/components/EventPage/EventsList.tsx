@@ -31,4 +31,4 @@ function EventsList({ events, deleteEvent, createNewEvent }: Props) {
     )
 }
 
-export default EventsList
+export default EventsList;

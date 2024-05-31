@@ -5,20 +5,20 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 function DateButton() {
-  return (
-    <>
-        <div
-            className={classes.box}
-        >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                    label="Date"
-                    value={dayjs('2024-05-19')}
-                />
-            </LocalizationProvider>
-        </div>
-    </>
-  )
+    return (
+        <>
+            <div
+                className={classes.box}
+            >
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        label="Date"
+                        value={dayjs('2024-05-19')}
+                    />
+                </LocalizationProvider>
+            </div>
+        </>
+    )
 }
 
-export default DateButton
+export default DateButton;

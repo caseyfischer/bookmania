@@ -4,7 +4,7 @@ import useEvents from '~/utils/event-store';
 import { useState } from 'react';
 import TitleEditBox from './TitleEditBox';
 import clsx from 'clsx';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Menu, MenuItem } from '@mui/material';
 
 type Props = {
     event: Event
@@ -72,6 +72,7 @@ function EventDetail({ event }: Props) {
                     handleUpdateDescription={handleUpdateDescription}
                     handleBlur={handleBlur}
                     className={classes.editBox}
+                    onClose={() => { toggleEditBox(editBoxes.none) }}
                 />
             default:
                 return <></>
@@ -97,15 +98,15 @@ function EventDetail({ event }: Props) {
                     </button>
 
                     {/* TODO move this into a separate component? or clean it up somehow */}
-                    <IconButton
-                        className={clsx(classes.moreMenuIcon, moreMenuOpen && classes.open)}
+                    <button
+                        className={clsx(classes.moreMenuButton, moreMenuOpen && classes.open)}
                         aria-label="more"
                         id="long-button"
                         aria-controls={moreMenuOpen ? 'long-menu' : undefined}
                         aria-expanded={moreMenuOpen ? 'true' : undefined}
                         aria-haspopup="true"
                         onClick={handleMoreMenuClick}
-                    ><p>...</p></IconButton>
+                    ><p>...</p></button>
                     <Menu
                         className={classes.menu}
                         MenuListProps={{
